@@ -1,29 +1,34 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
-import Releases from "./pages/Releases";
-import Contacts from "./pages/Contacts";
 import Booking from "./pages/Booking";
-import Login from "./pages/Login";
+import Contact from "./pages/Contacts";
+import "./App.css";
+import ChatBot from "./components/Chatbot";
 
-function App() {
+const App = () => {
   return (
-    <>
-      <Navbar />
+    <Router>
+      <nav className="navbar">
+        <h2 className="logo">🎬 CineBook</h2>
+        <div className="nav-links">
+          <Link to="/">Home</Link>
+          <Link to="/Movies">Movies</Link>
+          <Link to="/Booking">Booking</Link>
+          <Link to="/Contact">Contact</Link>
+        </div>
+      </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/releases" element={<Releases />} />
-        <Route path="/contacts" element={<Contacts />} />
         <Route path="/booking" element={<Booking />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
-    </>
+
+      <ChatBot/>
+    </Router>
   );
-}
+};
 
 export default App;

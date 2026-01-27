@@ -1,11 +1,11 @@
-import React from 'react'
-
-const Contacts = () => {
+const Contact = () => {
   return (
-    <div>
-      Contacts
+    <div className="page">
+      <h1>Contact Us 📞</h1>
+      <p>Email: support@cinebook.com</p>
+      <p>Phone: +91 98765 43210</p>
     </div>
-  )
-}
+  );
+};
 
-export default Contacts
+export default Contact;
