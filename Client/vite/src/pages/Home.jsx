@@ -1,37 +1,38 @@
 const Home = () => {
   return (
-    <div className="home">
-
-      {/* 🎬 HERO SECTION */}
+    <div>
       <section className="hero">
-        <div className="hero-overlay">
-          <h1>Your Ticket to the <span>Best Movies</span></h1>
-          <p>Book Now and Enjoy the Show!</p>
-          <button className="primary-btn">Book Tickets</button>
+        <div className="hero-content">
+          <h1>Book Tickets for the Latest Blockbusters</h1>
+          <p>Experience cinema like never before.</p>
+          <button className="primary-btn">Browse Movies</button>
         </div>
       </section>
 
-      {/* 🎟 NOW SHOWING */}
-      <section className="ticket-section">
-        <h2 className="section-title">Now Showing</h2>
-        <div className="ticket-row">
-          <div className="ticket-card">Action Saga<button>Book Now</button></div>
-          <div className="ticket-card">Galactic Quest<button>Book Now</button></div>
-          <div className="ticket-card">Mystery Manor<button>Book Now</button></div>
-          <div className="ticket-card">Romantic Escape<button>Book Now</button></div>
+      <section className="movies-section">
+        <h2>Now Showing</h2>
+        <div className="movie-grid">
+          <div className="movie-card">Movie 1</div>
+          <div className="movie-card">Movie 2</div>
+          <div className="movie-card">Movie 3</div>
+          <div className="movie-card">Movie 4</div>
         </div>
       </section>
 
-      {/* ⭐ FEATURES */}
       <section className="features">
-        <h2 className="section-title">Why Choose CineBook?</h2>
-        <div className="feature-row">
-          <div className="feature-card">⚡ Easy Booking</div>
-          <div className="feature-card">🎥 Best Experience</div>
-          <div className="feature-card">🔒 Secure Payments</div>
+        <div className="feature">
+          <h3>⚡ Fast Booking</h3>
+          <p>Book tickets in seconds with a smooth interface.</p>
+        </div>
+        <div className="feature">
+          <h3>💺 Easy Seat Selection</h3>
+          <p>Select your favorite seats with a visual layout.</p>
+        </div>
+        <div className="feature">
+          <h3>🔒 Secure Payments</h3>
+          <p>Your transactions are safe and encrypted.</p>
         </div>
       </section>
-
     </div>
   );
 };

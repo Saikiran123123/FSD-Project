@@ -1,132 +1,6 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #0b0b0b;
-  color: white;
-}
-
-/* 🎬 HERO THEATRE BACKGROUND */
-.hero {
-  height: 100vh;
-  background: url("/images/theatre-bg.jpg") center/cover no-repeat;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.hero-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4));
-  padding: 40px;
-  border-radius: 10px;
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-.hero h1 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
-
-.hero h1 span {
-  color: #ffb703;
-}
-
-.primary-btn {
-  background: linear-gradient(45deg, #d00000, #ff5400);
-  border: none;
-  padding: 12px 28px;
-  color: white;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.primary-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255,84,0,0.7);
-}
-
-/* 🎟 TICKET SECTION */
-.ticket-section {
-  padding: 70px 40px;
-  background: linear-gradient(to bottom, #111, #0b0b0b);
-  text-align: center;
-}
-
-.section-title {
-  font-size: 32px;
-  margin-bottom: 40px;
-  color: #ffb703;
-}
-
-.ticket-row {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
-}
-
-.ticket-card {
-  background: #1c1c1c;
-  border: 2px dashed rgba(255,255,255,0.2);
-  border-radius: 15px;
-  padding: 25px;
-  width: 220px;
-  transition: 0.4s;
-}
-
-.ticket-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
-}
-
-.ticket-card button {
-  margin-top: 15px;
-  background: #d00000;
-  border: none;
-  padding: 8px 16px;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* ⭐ FEATURES */
-.features {
-  padding: 60px 30px;
-  background: #121212;
-}
-
-.feature-row {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-.feature-card {
-  background: #1f1f1f;
-  padding: 25px;
-  border-radius: 12px;
-  width: 220px;
-  text-align: center;
-  transition: 0.3s;
-}
-
-.feature-card:hover {
-  background: #ffb703;
-  color: black;
-}
-
-/* ✨ Animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
   color: white;
 }
@@ -293,4 +167,61 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= AUTH PAGES ================= */
+.auth-page {
+  height: 100vh;
+  background: url("/images/theatre-bg.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.auth-card h2 {
+  color: #ffb703;
+  margin-bottom: 10px;
+}
+
+.auth-card p {
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.primary-btn {
+  margin-top: 10px;
+  padding: 10px;
+  background: #e50914;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.auth-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-link a {
+  color: #ffb703;
+  text-decoration: none;
 }
