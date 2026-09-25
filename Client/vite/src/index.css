@@ -1,68 +1,299 @@
+@import "tailwindcss";
+@source "../index.html";
+@source "./**/*.{js,jsx,ts,tsx}";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', -apple-system, sans-serif;
+  --color-brand-red: #e50914;
+  --color-brand-red-hover: #ff1f2d;
+  --color-brand-dark: #07070b;
+  --color-brand-card: #10111a;
+  --color-brand-card-hover: #161724;
+  --color-brand-gold: #ffb703;
+  --color-brand-emerald: #10b981;
+  --color-brand-teal: #00d4aa;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --bg-primary: #07070b;
+  --bg-secondary: #0c0d15;
+  --bg-card: rgba(16, 17, 26, 0.85);
+  --bg-card-solid: #10111a;
+  --bg-surface: #141522;
+  --accent-red: #e50914;
+  --accent-red-hover: #ff1f2d;
+  --accent-gold: #ffb703;
+  --accent-emerald: #10b981;
+  --accent-teal: #00d4aa;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(229, 9, 20, 0.4);
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Subtle Cinematic Background Glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(229, 9, 20, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 85% 30%, rgba(147, 51, 234, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(0, 212, 170, 0.02) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.015em;
+}
+
+/* 1. Global Cinema Container System */
+.container-cinema {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 640px) {
+  .container-cinema {
+    padding-inline: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-cinema {
+    padding-inline: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-cinema {
+    padding-inline: 64px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07070b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #181926;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e50914;
+}
+
+/* 2. Glassmorphism Design System */
+.glass-navbar {
+  background: rgba(10, 10, 16, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.20);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(229, 9, 20, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 24px rgba(229, 9, 20, 0.15);
+}
+
+.glass-soft {
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-hero-panel {
+  background: rgba(10, 10, 16, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+}
+
+/* 3. Button System */
+.btn-cinema {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e50914 0%, #b80610 100%);
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(229, 9, 20, 0.35);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.btn-cinema:hover {
+  background: linear-gradient(135deg, #ff1f2d 0%, #c90712 100%);
+  box-shadow: 0 6px 28px rgba(229, 9, 20, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-cinema:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+/* 4. Badges System */
+.badge-spotlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(229, 9, 20, 0.16);
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  color: #ff4d58;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badge-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.10);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #ffb703;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge-format {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #d4d4d8;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 5. Skeleton Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
   }
-  a:hover {
-    color: #747bff;
+  100% {
+    background-position: 200% 0;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 25%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+/* Print Stylesheet for Digital QR Ticket */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-ticket, #printable-ticket * {
+    visibility: visible;
+  }
+  #printable-ticket {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 24px;
+    background: white !important;
+    color: black !important;
+    border: 2px solid #000 !important;
   }
 }
