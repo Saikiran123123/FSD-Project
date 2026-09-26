@@ -1,0 +1,16 @@
+{
+  "name": "fsd-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CineBook - Full Stack Movie Ticket Booking Platform",
+  "scripts": {
+    "postinstall": "npm --prefix Server install",
+    "build": "npm --prefix Server install",
+    "start": "npm --prefix Server start",
+    "server": "npm --prefix Server run dev",
+    "client": "npm --prefix Client/vite run dev"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -31,14 +31,20 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
   'http://127.0.0.1:5173',
-  process.env.CLIENT_URL,
+  ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map(u => u.trim()) : [])
 ].filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
       // allow requests with no origin (like mobile apps or curl)
-      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        allowedOrigins.includes('*') ||
+        process.env.NODE_ENV !== 'production' ||
+        (process.env.CLIENT_URL && (process.env.CLIENT_URL === '*' || origin.startsWith(process.env.CLIENT_URL.replace(/\/$/, ''))))
+      ) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS policy'));
