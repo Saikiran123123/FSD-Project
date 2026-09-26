@@ -568,8 +568,8 @@ const Movies = () => {
 
         {/* Main Movie Grid / Skeletons / Empty State */}
         {loading && movies.length === 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-2">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6 pt-2">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
               <MovieCardSkeleton key={n} />
             ))}
           </div>
@@ -586,7 +586,7 @@ const Movies = () => {
         ) : (
           <div className="space-y-12">
             {/* Primary Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
               {movies.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} />
               ))}
@@ -620,7 +620,7 @@ const Movies = () => {
                   actionText="View All Telugu →"
                   actionLink="/movies?language=te"
                 />
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
                   {languageShowcases.te.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
                   ))}
@@ -638,7 +638,7 @@ const Movies = () => {
                   actionText="View All Hindi →"
                   actionLink="/movies?language=hi"
                 />
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
                   {languageShowcases.hi.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
                   ))}
@@ -656,7 +656,7 @@ const Movies = () => {
                   actionText="View All Tamil →"
                   actionLink="/movies?language=ta"
                 />
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
                   {languageShowcases.ta.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
                   ))}
@@ -674,7 +674,7 @@ const Movies = () => {
                   actionText="View All Malayalam →"
                   actionLink="/movies?language=ml"
                 />
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
                   {languageShowcases.ml.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
                   ))}
@@ -692,7 +692,7 @@ const Movies = () => {
                   actionText="View All Kannada →"
                   actionLink="/movies?language=kn"
                 />
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
                   {languageShowcases.kn.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
                   ))}

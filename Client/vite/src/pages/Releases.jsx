@@ -42,8 +42,8 @@ const Releases = () => {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
               <MovieCardSkeleton key={n} />
             ))}
           </div>
@@ -54,7 +54,7 @@ const Releases = () => {
             description="Check back soon for freshly announced blockbuster premiere schedules."
           />
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
             {upcomingMovies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} isUpcoming={true} />
             ))}

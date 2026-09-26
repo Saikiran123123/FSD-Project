@@ -41,7 +41,7 @@ const Navbar = () => {
           : 'bg-[#07070b]/80 backdrop-blur-md border-b border-white/[0.06] py-3.5'
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between h-14">
+      <div className="container-cinema flex items-center justify-between h-16">
         {/* Left: Brand Logo (Wordmark + Subtle Subtitle) */}
         <Link to="/" className="flex flex-col group select-none">
           <span className="text-2xl lg:text-[28px] font-[800] tracking-tight text-white leading-none">

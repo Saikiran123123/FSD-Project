@@ -487,7 +487,7 @@ const Home = () => {
         </div>
 
         {/* Hero Main Content (Centered vertically in the main area) */}
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 w-full my-auto py-4 sm:py-6">
+        <div className="relative z-10 container-cinema w-full my-auto py-6 sm:py-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             {/* Left 55%: Brand Eyebrow, Heading, Description, Search Bar, Matching Action Buttons */}
             <div className="lg:col-span-7 space-y-0">
@@ -743,7 +743,7 @@ const Home = () => {
         </div>
 
         {/* Floating "BOOK YOUR MOVIE" Bar at the bottom edge of the Hero Screen */}
-        <div className="relative z-10 max-w-[1400px] w-full mx-auto px-6 sm:px-8 lg:px-12 pt-2">
+        <div className="relative z-10 container-cinema w-full pt-4 pb-4">
           <div className="bg-[#10111a]/95 border border-white/12 backdrop-blur-2xl rounded-2xl p-4 sm:p-5 shadow-2xl space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-[12px] font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
@@ -847,8 +847,8 @@ const Home = () => {
       {/* =========================================================================
           2. RECOMMENDED / NOW SHOWING (6 Cards Desktop)
          ========================================================================= */}
-      <section className="py-20 sm:py-24 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="space-y-8">
+      <section className="py-14 sm:py-20 border-t border-white/[0.06]">
+        <div className="container-cinema space-y-8">
           <SectionHeader
             tag="RECOMMENDED FOR YOU"
             tagColor="text-[#e50914]"
@@ -859,13 +859,13 @@ const Home = () => {
           />
 
           {loading && nowPlaying.length === 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 lg:gap-5">
               {[1, 2, 3, 4, 5, 6].map((n) => (
                 <MovieCardSkeleton key={n} />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 lg:gap-5">
               {displayNowPlaying.slice(0, 6).map((movie) => (
                 <MovieCard key={movie.id} movie={movie} theatres={displayTheatres} city={bookingCity} />
               ))}
@@ -877,8 +877,8 @@ const Home = () => {
       {/* =========================================================================
           3. MOVIES BY LANGUAGE (Interactive Regional & Global Discovery)
          ========================================================================= */}
-      <section className="py-20 sm:py-24 border-t border-white/[0.06] max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="space-y-8">
+      <section className="py-14 sm:py-20 border-t border-white/[0.06]">
+        <div className="container-cinema space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <span className="text-[#ffb703] text-xs font-black uppercase tracking-widest block">
@@ -929,13 +929,13 @@ const Home = () => {
 
           {/* Movies Grid for Active Language */}
           {loadingLanguage && !languageMoviesCache[selectedLanguage] ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 lg:gap-5">
               {[1, 2, 3, 4, 5, 6].map((n) => (
                 <MovieCardSkeleton key={n} />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 lg:gap-5">
               {displayLanguageMovies.slice(0, 6).map((movie) => (
                 <MovieCard key={movie.id} movie={movie} theatres={displayTheatres} city={bookingCity} />
               ))}
@@ -947,8 +947,8 @@ const Home = () => {
       {/* =========================================================================
           4. BROWSE BY GENRE (Interactive Mood & Category Selection)
          ========================================================================= */}
-      <section className="py-20 sm:py-24 border-t border-white/[0.06] max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="space-y-8">
+      <section className="py-14 sm:py-20 border-t border-white/[0.06]">
+        <div className="container-cinema space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <span className="text-[#00d4aa] text-xs font-black uppercase tracking-widest block">
@@ -993,13 +993,13 @@ const Home = () => {
 
           {/* Movies Grid for Active Genre */}
           {loadingGenre && !genreMoviesCache[selectedGenre] ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 lg:gap-5">
               {[1, 2, 3, 4, 5, 6].map((n) => (
                 <MovieCardSkeleton key={n} />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 lg:gap-5">
               {displayGenreMovies.slice(0, 6).map((movie) => (
                 <MovieCard key={movie.id} movie={movie} theatres={displayTheatres} city={bookingCity} />
               ))}
@@ -1011,8 +1011,8 @@ const Home = () => {
       {/* =========================================================================
           5. FIND A THEATRE (BookMyShow / Fandango Style Discovery)
          ========================================================================= */}
-      <section className="py-20 sm:py-24 border-t border-white/[0.06] max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="space-y-8">
+      <section className="py-14 sm:py-20 border-t border-white/[0.06]">
+        <div className="container-cinema space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
               <span className="text-[#ffb703] text-xs font-black uppercase tracking-widest block">
@@ -1112,8 +1112,8 @@ const Home = () => {
       {/* =========================================================================
           6. COMING SOON (Upcoming Movies)
          ========================================================================= */}
-      <section className="py-20 sm:py-24 border-t border-white/[0.06] max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="space-y-8">
+      <section className="py-14 sm:py-20 border-t border-white/[0.06]">
+        <div className="container-cinema space-y-8">
           <SectionHeader
             tag="ANTICIPATED RELEASES"
             tagColor="text-[#ffb703]"
@@ -1123,7 +1123,7 @@ const Home = () => {
             actionLink="/releases"
           />
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 lg:gap-5">
             {displayUpcoming.slice(0, 6).map((movie) => (
               <MovieCard key={movie.id} movie={movie} isUpcoming={true} theatres={displayTheatres} city={bookingCity} />
             ))}
@@ -1134,8 +1134,8 @@ const Home = () => {
       {/* =========================================================================
           7. OFFERS (Movie Night Offers - Premium Voucher Passes)
          ========================================================================= */}
-      <section className="py-20 sm:py-24 border-t border-white/[0.06] max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="space-y-8 sm:space-y-10">
+      <section className="py-14 sm:py-20 border-t border-white/[0.06]">
+        <div className="container-cinema space-y-8 sm:space-y-10">
           <SectionHeader
             tag="EXCLUSIVE PRIVILEGES"
             tagColor="text-[#ffb703]"
@@ -1199,8 +1199,8 @@ const Home = () => {
       {/* =========================================================================
           8. WHY CINEBOOK? (Spacious Modern Feature Cards)
          ========================================================================= */}
-      <section className="py-20 sm:py-24 border-t border-white/[0.06] max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="space-y-12">
+      <section className="py-14 sm:py-20 border-t border-white/[0.06]">
+        <div className="container-cinema space-y-12">
           <div className="text-center max-w-xl mx-auto space-y-2.5">
             <span className="text-[#e50914] text-xs font-black uppercase tracking-[0.2em] block">
               • THE CINEBOOK PROMISE
@@ -1239,57 +1239,59 @@ const Home = () => {
       {/* =========================================================================
           9. CINEBOT (Not Sure What to Watch? - AI Concierge Lounge)
          ========================================================================= */}
-      <section className="py-20 sm:py-24 border-t border-white/[0.06] max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="relative rounded-[28px] bg-gradient-to-r from-[#121325] via-[#10111e] to-[#181126] border border-white/12 p-7 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
-          {/* Atmospheric Ambient Glows */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-[#e50914]/10 to-transparent blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-10 w-80 h-80 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#ffb703]/8 to-transparent blur-3xl pointer-events-none" />
+      <section className="py-14 sm:py-20 border-t border-white/[0.06]">
+        <div className="container-cinema">
+          <div className="relative rounded-[28px] bg-gradient-to-r from-[#121325] via-[#10111e] to-[#181126] border border-white/12 p-7 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
+            {/* Atmospheric Ambient Glows */}
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-[#e50914]/10 to-transparent blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-10 w-80 h-80 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#ffb703]/8 to-transparent blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-            <div className="space-y-4 max-w-2xl">
-              <div className="inline-flex items-center gap-2 text-[#ffb703] text-xs font-black uppercase tracking-[0.16em]">
-                <span className="w-2 h-2 rounded-full bg-[#ffb703] animate-pulse" />
-                <span>AI CONCIERGE</span>
+            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <div className="space-y-4 max-w-2xl">
+                <div className="inline-flex items-center gap-2 text-[#ffb703] text-xs font-black uppercase tracking-[0.16em]">
+                  <span className="w-2 h-2 rounded-full bg-[#ffb703] animate-pulse" />
+                  <span>AI CONCIERGE</span>
+                </div>
+
+                <div className="space-y-1.5">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[800] text-white tracking-tight">
+                    NOT SURE WHAT TO WATCH?
+                  </h2>
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-xl">
+                    Tell CineBot what mood you&apos;re in and get instant smart movie recommendations tailored to your taste.
+                  </p>
+                </div>
+
+                {/* Interactive Quick Prompts */}
+                <div className="flex flex-wrap items-center gap-2 pt-1">
+                  <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider mr-1">Quick Moods:</span>
+                  {CINEBOT_OPTIONS.map((genre) => (
+                    <button
+                      key={genre}
+                      onClick={() => handleAskCineBot(genre)}
+                      className="bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/25 text-xs font-semibold text-zinc-200 hover:text-white px-3.5 py-1.5 rounded-xl cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
+                    >
+                      {genre === 'Action' && '🔥 '}
+                      {genre === 'Comedy' && '😂 '}
+                      {genre === 'Thriller' && '⚡ '}
+                      {genre === 'Horror' && '👻 '}
+                      {genre === 'Family' && '🍿 '}
+                      {genre}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <div className="space-y-1.5">
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[800] text-white tracking-tight">
-                  NOT SURE WHAT TO WATCH?
-                </h2>
-                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-xl">
-                  Tell CineBot what mood you&apos;re in and get instant smart movie recommendations tailored to your taste.
-                </p>
+              <div className="shrink-0 w-full sm:w-auto">
+                <button
+                  onClick={() => handleAskCineBot()}
+                  className="w-full sm:w-auto h-[52px] px-8 rounded-2xl bg-gradient-to-r from-[#e50914] to-[#ff2b37] hover:from-[#ff1f2d] hover:to-[#e50914] text-white text-sm font-black shadow-xl shadow-red-600/30 flex items-center justify-center gap-2.5 cursor-pointer hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  <span className="text-lg">🤖</span>
+                  <span>ASK CINEBOT AI</span>
+                  <span>→</span>
+                </button>
               </div>
-
-              {/* Interactive Quick Prompts */}
-              <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider mr-1">Quick Moods:</span>
-                {CINEBOT_OPTIONS.map((genre) => (
-                  <button
-                    key={genre}
-                    onClick={() => handleAskCineBot(genre)}
-                    className="bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/25 text-xs font-semibold text-zinc-200 hover:text-white px-3.5 py-1.5 rounded-xl cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
-                  >
-                    {genre === 'Action' && '🔥 '}
-                    {genre === 'Comedy' && '😂 '}
-                    {genre === 'Thriller' && '⚡ '}
-                    {genre === 'Horror' && '👻 '}
-                    {genre === 'Family' && '🍿 '}
-                    {genre}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="shrink-0 w-full sm:w-auto">
-              <button
-                onClick={() => handleAskCineBot()}
-                className="w-full sm:w-auto h-[52px] px-8 rounded-2xl bg-gradient-to-r from-[#e50914] to-[#ff2b37] hover:from-[#ff1f2d] hover:to-[#e50914] text-white text-sm font-black shadow-xl shadow-red-600/30 flex items-center justify-center gap-2.5 cursor-pointer hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <span className="text-lg">🤖</span>
-                <span>ASK CINEBOT AI</span>
-                <span>→</span>
-              </button>
             </div>
           </div>
         </div>
