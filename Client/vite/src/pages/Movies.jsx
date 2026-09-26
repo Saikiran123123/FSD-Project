@@ -5,6 +5,7 @@ import MovieCard from '../components/MovieCard';
 import SectionHeader from '../components/ui/SectionHeader';
 import { MovieCardSkeleton } from '../components/ui/Skeleton';
 import EmptyState from '../components/ui/EmptyState';
+import { CURATED_MOVIES } from '../data/curatedData';
 
 const MAJOR_INDIAN_LANGUAGES = [
   { code: 'all', label: 'All' },
@@ -74,11 +75,11 @@ const Movies = () => {
 
   // Curated Language Carousels data for the multi-language discovery row
   const [languageShowcases, setLanguageShowcases] = useState({
-    te: [],
-    hi: [],
-    ta: [],
-    ml: [],
-    kn: [],
+    te: CURATED_MOVIES.filter((m) => m.original_language === 'te').slice(0, 4),
+    hi: CURATED_MOVIES.filter((m) => m.original_language === 'hi').slice(0, 4),
+    ta: CURATED_MOVIES.filter((m) => m.original_language === 'ta').slice(0, 4),
+    ml: CURATED_MOVIES.filter((m) => m.original_language === 'ml').slice(0, 4),
+    kn: CURATED_MOVIES.filter((m) => m.original_language === 'kn').slice(0, 4),
   });
   const [showLanguageSections, setShowLanguageSections] = useState(true);
 
@@ -156,7 +157,7 @@ const Movies = () => {
           });
         }
 
-        if (res && res.results) {
+        if (res && res.results && res.results.length > 0) {
           if (append) {
             setMovies((prev) => [...prev, ...res.results]);
           } else {
@@ -164,9 +165,27 @@ const Movies = () => {
           }
           setTotalPages(res.total_pages || 1);
           setTotalResults(res.total_results || res.results.length);
+        } else {
+          // Fallback to matching curated movies
+          let filtered = [...CURATED_MOVIES];
+          if (urlLanguage !== 'all') {
+            filtered = filtered.filter((m) => m.original_language === urlLanguage);
+          }
+          if (urlGenre !== 'All') {
+            filtered = filtered.filter((m) =>
+              m.genres?.some((g) => (typeof g === 'string' ? g : g.name).toLowerCase().includes(urlGenre.toLowerCase()))
+            );
+          }
+          if (urlYear !== 'All') {
+            filtered = filtered.filter((m) => m.release_date && m.release_date.startsWith(urlYear));
+          }
+          setMovies(filtered.length > 0 ? filtered : CURATED_MOVIES);
+          setTotalPages(1);
+          setTotalResults(filtered.length || CURATED_MOVIES.length);
         }
       } catch (err) {
         console.error('Error fetching movies:', err);
+        setMovies(CURATED_MOVIES);
       } finally {
         setLoading(false);
         setLoadingMore(false);
@@ -199,12 +218,19 @@ const Movies = () => {
           movieService.getMoviesByLanguage('kn', 1),
         ]);
 
+        const getShowcaseList = (res, lang) => {
+          const list = res?.results || [];
+          if (list.length >= 4) return list.slice(0, 4);
+          const curatedForLang = CURATED_MOVIES.filter((m) => m.original_language === lang);
+          return [...list, ...curatedForLang].slice(0, 4);
+        };
+
         setLanguageShowcases({
-          te: (teRes.results || []).slice(0, 4),
-          hi: (hiRes.results || []).slice(0, 4),
-          ta: (taRes.results || []).slice(0, 4),
-          ml: (mlRes.results || []).slice(0, 4),
-          kn: (knRes.results || []).slice(0, 4),
+          te: getShowcaseList(teRes, 'te'),
+          hi: getShowcaseList(hiRes, 'hi'),
+          ta: getShowcaseList(taRes, 'ta'),
+          ml: getShowcaseList(mlRes, 'ml'),
+          kn: getShowcaseList(knRes, 'kn'),
         });
       } catch (err) {
         console.error('Error fetching language showcases:', err);

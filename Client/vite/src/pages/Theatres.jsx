@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { theatreService } from '../services';
 import LoadingSpinner from '../components/LoadingSpinner';
 import EmptyState from '../components/ui/EmptyState';
+import { CURATED_THEATRES } from '../data/curatedData';
 
 const Theatres = () => {
   const [theatres, setTheatres] = useState([]);
   const [selectedCity, setSelectedCity] = useState('All');
   const [loading, setLoading] = useState(true);
 
-  const cities = ['All', 'Hyderabad', 'Bengaluru', 'Mumbai', 'Delhi-NCR'];
+  const cities = ['All', 'Hyderabad', 'Bengaluru', 'Mumbai', 'Chennai', 'Delhi-NCR'];
 
   useEffect(() => {
     const fetchTheatres = async () => {
@@ -16,11 +17,20 @@ const Theatres = () => {
       try {
         const cityParam = selectedCity === 'All' ? '' : selectedCity;
         const res = await theatreService.getTheatres(cityParam);
-        if (res.success && res.data) {
+        if (res.success && res.data && res.data.length > 0) {
           setTheatres(res.data);
+        } else {
+          const matching = CURATED_THEATRES.filter(
+            (t) => selectedCity === 'All' || t.city.toLowerCase() === selectedCity.toLowerCase()
+          );
+          setTheatres(matching.length > 0 ? matching : CURATED_THEATRES);
         }
       } catch (err) {
         console.error(err);
+        const matching = CURATED_THEATRES.filter(
+          (t) => selectedCity === 'All' || t.city.toLowerCase() === selectedCity.toLowerCase()
+        );
+        setTheatres(matching.length > 0 ? matching : CURATED_THEATRES);
       } finally {
         setLoading(false);
       }

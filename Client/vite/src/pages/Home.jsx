@@ -4,6 +4,7 @@ import { movieService, theatreService, offerService } from '../services';
 import MovieCard from '../components/MovieCard';
 import SectionHeader from '../components/ui/SectionHeader';
 import { MovieCardSkeleton } from '../components/ui/Skeleton';
+import { CURATED_MOVIES, CURATED_THEATRES } from '../data/curatedData';
 
 const LANGUAGES = [
   { code: 'te', name: 'Telugu', label: 'Tollywood' },
@@ -53,144 +54,6 @@ const VALUE_PROPS = [
 ];
 
 const CINEBOT_OPTIONS = ['Action', 'Comedy', 'Thriller', 'Horror', 'Family'];
-
-const FALLBACK_POPULAR_MOVIES = [
-  {
-    id: 579974,
-    title: 'RRR',
-    original_language: 'te',
-    language_name: 'Telugu',
-    vote_average: 7.8,
-    release_date: '2022-03-24',
-    poster_url: 'https://image.tmdb.org/t/p/w500/nEufeZlyAOLqO2brrs0ye2rrHg6.jpg',
-    genres: ['Action', 'Drama'],
-    overview: 'A fictional history of two legendary revolutionaries journey away from home before fighting for their country.',
-  },
-  {
-    id: 998844,
-    title: 'Pushpa 2: The Rule',
-    original_language: 'te',
-    language_name: 'Telugu',
-    vote_average: 8.0,
-    release_date: '2024-12-05',
-    poster_url: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',
-    genres: ['Action', 'Crime'],
-    overview: 'Pushpa Raj continues his reign over the red sandalwood smuggling empire while locking horns with Bhanwar Singh.',
-  },
-  {
-    id: 693134,
-    title: 'Dune: Part Two',
-    original_language: 'en',
-    language_name: 'English',
-    vote_average: 8.3,
-    release_date: '2024-03-01',
-    poster_url: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',
-    genres: ['Sci-Fi', 'Adventure'],
-    overview: 'Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.',
-  },
-  {
-    id: 872585,
-    title: 'Jawan',
-    original_language: 'hi',
-    language_name: 'Hindi',
-    vote_average: 7.5,
-    release_date: '2023-09-07',
-    poster_url: 'https://image.tmdb.org/t/p/w500/jYW3rGk7kEaPz772X5wK1y3sP2k.jpg',
-    genres: ['Action', 'Thriller'],
-    overview: 'A high-octane action thriller outlining the emotional journey of a man who sets out to rectify the wrongs in society.',
-  },
-  {
-    id: 1083862,
-    title: 'Leo',
-    original_language: 'ta',
-    language_name: 'Tamil',
-    vote_average: 7.6,
-    release_date: '2023-10-19',
-    poster_url: 'https://image.tmdb.org/t/p/w500/pIQnJ58eU9n5sA1L2r1n0k9b4q.jpg',
-    genres: ['Action', 'Crime'],
-    overview: 'A mild-mannered cafe owner in Thekkady becomes a local hero when he takes down a gang of murderous thugs.',
-  },
-  {
-    id: 1022789,
-    title: 'Manjummel Boys',
-    original_language: 'ml',
-    language_name: 'Malayalam',
-    vote_average: 8.2,
-    release_date: '2024-02-22',
-    poster_url: 'https://image.tmdb.org/t/p/w500/7m3j8H5c8vP9L0k9q8v6m5k1n.jpg',
-    genres: ['Adventure', 'Thriller'],
-    overview: 'A group of friends embark on a trip to Kodaikanal where one of them falls into the perilous Guna Caves.',
-  },
-];
-
-const FALLBACK_THEATRES = [
-  {
-    _id: 'th-1',
-    name: 'CineBook IMAX & 4DX Mall',
-    chain: 'CineBook Luxe',
-    city: 'Hyderabad',
-    area: 'Hitec City',
-    address: 'Cyber Towers Main Rd, Inorbit Mall Area, Hyderabad',
-    facilities: ['IMAX with Laser', 'Dolby Atmos 7.1', 'VIP Recliners'],
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=1200&auto=format&fit=crop&q=80',
-  },
-  {
-    _id: 'th-2',
-    name: 'CineBook PXL Cinemas',
-    chain: 'CineBook Premier',
-    city: 'Hyderabad',
-    area: 'Banjara Hills',
-    address: 'Road No. 2, Banjara Hills, Hyderabad',
-    facilities: ['4K Laser Projection', 'Dolby Atmos', 'Recliner Lounges'],
-    rating: 4.7,
-    image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&auto=format&fit=crop&q=80',
-  },
-  {
-    _id: 'th-3',
-    name: 'CineBook Grand Multiplex',
-    chain: 'CineBook Classic',
-    city: 'Bengaluru',
-    area: 'Koramangala',
-    address: '80 Feet Road, 4th Block, Koramangala, Bengaluru',
-    facilities: ['Dolby Atmos', '4K Projection', 'Food Court'],
-    rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1595769816263-9b910be24d5f?w=1200&auto=format&fit=crop&q=80',
-  },
-  {
-    _id: 'th-4',
-    name: 'CineBook Royale Screen',
-    chain: 'CineBook Luxe',
-    city: 'Mumbai',
-    area: 'Bandra West',
-    address: 'Linking Road, Bandra West, Mumbai',
-    facilities: ['IMAX 3D', 'VIP Recliner Beds', 'Dolby Atmos'],
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=1200&auto=format&fit=crop&q=80',
-  },
-  {
-    _id: 'th-5',
-    name: 'CineBook Escape Multiplex',
-    chain: 'CineBook Luxe',
-    city: 'Chennai',
-    area: 'Royapettah',
-    address: 'Express Avenue Mall, Whites Road, Royapettah, Chennai',
-    facilities: ['Dolby Atmos', 'Laser 4K', 'Blind Recliners'],
-    rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=1200&auto=format&fit=crop&q=80',
-  },
-  {
-    _id: 'th-6',
-    name: 'CineBook Select Citywalk IMAX',
-    chain: 'CineBook Luxe',
-    city: 'Delhi-NCR',
-    area: 'Saket',
-    address: 'Select Citywalk Mall, A3 District Centre, Saket, New Delhi',
-    facilities: ['IMAX with Laser', 'Dolby Atmos', 'Director Cut Recliners'],
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=1200&auto=format&fit=crop&q=80',
-  },
-];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -313,7 +176,7 @@ const Home = () => {
     const fetchCityTheatres = async () => {
       try {
         const res = await theatreService.getTheatres(bookingCity);
-        if (isMounted && res?.data) {
+        if (isMounted && res?.data && res.data.length > 0) {
           setTheatres(res.data);
         }
       } catch (err) {
@@ -340,18 +203,20 @@ const Home = () => {
             [langCode]: list,
           }));
         } else {
-          // Fallback to discoverMovies by language
-          const discRes = await movieService.discoverMovies({ language: langCode, sortBy: 'popularity.desc' });
-          const discList = discRes?.results || [];
-          if (discList.length > 0) {
-            setLanguageMoviesCache((prev) => ({
-              ...prev,
-              [langCode]: discList,
-            }));
-          }
+          // Fallback to curated catalog by language
+          const matchingCurated = CURATED_MOVIES.filter((m) => m.original_language === langCode);
+          setLanguageMoviesCache((prev) => ({
+            ...prev,
+            [langCode]: matchingCurated.length > 0 ? matchingCurated : CURATED_MOVIES.slice(0, 6),
+          }));
         }
       } catch (err) {
         console.error(`Error fetching movies for language ${langCode}:`, err);
+        const matchingCurated = CURATED_MOVIES.filter((m) => m.original_language === langCode);
+        setLanguageMoviesCache((prev) => ({
+          ...prev,
+          [langCode]: matchingCurated.length > 0 ? matchingCurated : CURATED_MOVIES.slice(0, 6),
+        }));
       } finally {
         setLoadingLanguage(false);
       }
@@ -376,9 +241,26 @@ const Home = () => {
             ...prev,
             [genreName]: list,
           }));
+        } else {
+          const gLower = genreName.toLowerCase();
+          const matchingCurated = CURATED_MOVIES.filter((m) =>
+            m.genres?.some((g) => (typeof g === 'string' ? g : g.name).toLowerCase().includes(gLower))
+          );
+          setGenreMoviesCache((prev) => ({
+            ...prev,
+            [genreName]: matchingCurated.length > 0 ? matchingCurated : CURATED_MOVIES.slice(0, 6),
+          }));
         }
       } catch (err) {
         console.error(`Error fetching movies for genre ${genreName}:`, err);
+        const gLower = genreName.toLowerCase();
+        const matchingCurated = CURATED_MOVIES.filter((m) =>
+          m.genres?.some((g) => (typeof g === 'string' ? g : g.name).toLowerCase().includes(gLower))
+        );
+        setGenreMoviesCache((prev) => ({
+          ...prev,
+          [genreName]: matchingCurated.length > 0 ? matchingCurated : CURATED_MOVIES.slice(0, 6),
+        }));
       } finally {
         setLoadingGenre(false);
       }
@@ -428,7 +310,9 @@ const Home = () => {
   };
 
   // Filter theatres for theatre section
-  const availableTheatres = theatres.length > 0 ? theatres : FALLBACK_THEATRES;
+  const cityCuratedTheatres = CURATED_THEATRES.filter((t) => t.city.toLowerCase() === bookingCity.toLowerCase());
+  const availableTheatres = theatres.length > 0 ? theatres : (cityCuratedTheatres.length > 0 ? cityCuratedTheatres : CURATED_THEATRES);
+  
   const filteredTheatres = availableTheatres.filter((t) => {
     if (!theatreSearch.trim()) return true;
     const q = theatreSearch.toLowerCase();
@@ -436,6 +320,7 @@ const Home = () => {
       t.name?.toLowerCase().includes(q) ||
       t.address?.toLowerCase().includes(q) ||
       t.area?.toLowerCase().includes(q) ||
+      t.chain?.toLowerCase().includes(q) ||
       t.city?.toLowerCase().includes(q)
     );
   });
@@ -443,10 +328,22 @@ const Home = () => {
   const displayTheatres = filteredTheatres.length > 0 ? filteredTheatres : availableTheatres;
 
   // Effective datasets with safe fallbacks
-  const displayNowPlaying = nowPlaying.length > 0 ? nowPlaying : FALLBACK_POPULAR_MOVIES;
-  const displayUpcoming = upcoming.length > 0 ? upcoming : FALLBACK_POPULAR_MOVIES;
-  const displayLanguageMovies = languageMoviesCache[selectedLanguage]?.length > 0 ? languageMoviesCache[selectedLanguage] : FALLBACK_POPULAR_MOVIES;
-  const displayGenreMovies = genreMoviesCache[selectedGenre]?.length > 0 ? genreMoviesCache[selectedGenre] : FALLBACK_POPULAR_MOVIES;
+  const displayNowPlaying = nowPlaying.length >= 6 ? nowPlaying : CURATED_MOVIES.filter((m) => m.status === 'now_playing');
+  const displayUpcoming = upcoming.length >= 6 ? upcoming : CURATED_MOVIES.filter((m) => m.status === 'upcoming' || new Date(m.release_date) >= new Date('2024-09-01'));
+  
+  const currentLangMatching = CURATED_MOVIES.filter((m) => m.original_language === selectedLanguage);
+  const displayLanguageMovies =
+    languageMoviesCache[selectedLanguage]?.length > 0
+      ? languageMoviesCache[selectedLanguage]
+      : (currentLangMatching.length > 0 ? currentLangMatching : CURATED_MOVIES.slice(0, 6));
+
+  const currentGenreMatching = CURATED_MOVIES.filter((m) =>
+    m.genres?.some((g) => (typeof g === 'string' ? g : g.name).toLowerCase().includes(selectedGenre.toLowerCase()))
+  );
+  const displayGenreMovies =
+    genreMoviesCache[selectedGenre]?.length > 0
+      ? genreMoviesCache[selectedGenre]
+      : (currentGenreMatching.length > 0 ? currentGenreMatching : CURATED_MOVIES.slice(0, 6));
 
   // Fallback offers if none loaded
   const displayOffers =

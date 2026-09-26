@@ -3,6 +3,7 @@ import { movieService } from '../services';
 import MovieCard from '../components/MovieCard';
 import { MovieCardSkeleton } from '../components/ui/Skeleton';
 import EmptyState from '../components/ui/EmptyState';
+import { CURATED_MOVIES } from '../data/curatedData';
 
 const Releases = () => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
@@ -13,11 +14,20 @@ const Releases = () => {
       setLoading(true);
       try {
         const res = await movieService.getUpcoming(1);
-        if (res.results) {
+        if (res.results && res.results.length >= 4) {
           setUpcomingMovies(res.results);
+        } else {
+          const curatedUpcoming = CURATED_MOVIES.filter(
+            (m) => m.status === 'upcoming' || new Date(m.release_date) >= new Date('2024-09-01')
+          );
+          setUpcomingMovies(curatedUpcoming.length > 0 ? curatedUpcoming : CURATED_MOVIES.slice(0, 8));
         }
       } catch (err) {
         console.error(err);
+        const curatedUpcoming = CURATED_MOVIES.filter(
+          (m) => m.status === 'upcoming' || new Date(m.release_date) >= new Date('2024-09-01')
+        );
+        setUpcomingMovies(curatedUpcoming.length > 0 ? curatedUpcoming : CURATED_MOVIES.slice(0, 8));
       } finally {
         setLoading(false);
       }

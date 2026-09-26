@@ -84,13 +84,13 @@ const MovieCard = ({ movie, isUpcoming = false, theatres = [], city = 'Hyderabad
   const langDisplay = (movie.language_name || LANGUAGE_LABELS[langCode] || langCode).toUpperCase();
 
   // Resolve screening theatre for this movie card
-  let theatreDisplay = 'CineBook Multiplexes';
+  let theatreDisplay = city ? `${city} Multiplexes` : 'Premier Multiplexes';
   if (Array.isArray(theatres) && theatres.length > 0) {
     const thIndex = Math.abs(Number(movie.id) || 0) % theatres.length;
     const th = theatres[thIndex];
-    theatreDisplay = th.name ? th.name.replace('CineBook ', '') : (th.area || 'Multiplex');
-  } else if (city) {
-    theatreDisplay = `${city} Multiplexes`;
+    if (th && th.name) {
+      theatreDisplay = th.area ? `${th.name} (${th.area})` : th.name;
+    }
   }
 
   return (
@@ -114,7 +114,7 @@ const MovieCard = ({ movie, isUpcoming = false, theatres = [], city = 'Hyderabad
         {/* Top Badges: Rating Left, Language Right */}
         <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none z-10 gap-1.5">
           {movie.vote_average > 0 ? (
-            <div className="bg-black/75 backdrop-blur-md border border-white/20 px-2.5 py-0.5 rounded-lg flex items-center gap-1 shadow-lg">
+            <div className="bg-black/80 backdrop-blur-md border border-white/20 px-2.5 py-0.5 rounded-lg flex items-center gap-1 shadow-lg">
               <span className="text-[#ffb703] text-xs">★</span>
               <span className="text-white text-xs font-black">{Number(movie.vote_average).toFixed(1)}</span>
             </div>
@@ -125,14 +125,14 @@ const MovieCard = ({ movie, isUpcoming = false, theatres = [], city = 'Hyderabad
           )}
 
           <div className="flex items-center gap-1">
-            <span className="bg-black/75 backdrop-blur-md text-[10px] text-zinc-200 font-extrabold px-2.5 py-0.5 rounded-lg border border-white/20 uppercase tracking-wide shadow-md">
+            <span className="bg-black/80 backdrop-blur-md text-[10px] text-zinc-200 font-extrabold px-2.5 py-0.5 rounded-lg border border-white/20 uppercase tracking-wide shadow-md">
               {langDisplay}
             </span>
           </div>
         </div>
 
         {/* Cinematic Hover Overlay with Synopsis, Theatres & Quick CTA */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3.5 flex flex-col justify-end z-20">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3.5 flex flex-col justify-end z-20">
           <p className="text-zinc-300 text-[11.5px] line-clamp-2 mb-2 leading-relaxed drop-shadow">
             {movie.overview || 'Experience the ultimate cinematic spectacle in premium sound and laser projection.'}
           </p>
@@ -157,20 +157,20 @@ const MovieCard = ({ movie, isUpcoming = false, theatres = [], city = 'Hyderabad
       <div className="pt-3 pb-0.5 px-0.5 flex flex-col justify-between flex-1 gap-1.5">
         <div>
           <Link to={`/movie/${movie.id}`}>
-            <h3 className="font-bold text-white text-sm sm:text-base line-clamp-1 group-hover:text-[#e50914] transition-colors">
+            <h3 className="font-bold text-white text-sm sm:text-base line-clamp-2 min-h-[2.5rem] leading-snug group-hover:text-[#e50914] transition-colors">
               {movie.title || movie.original_title || 'Untitled Movie'}
             </h3>
           </Link>
-          <div className="flex items-center justify-between text-xs text-zinc-400 font-medium mt-0.5">
+          <div className="flex items-center justify-between text-xs text-zinc-400 font-medium mt-1">
             <span className="truncate">{genresList.join(' • ') || 'Feature Film'}</span>
             {releaseYear && <span className="font-mono text-zinc-500 font-semibold ml-2 shrink-0">{releaseYear}</span>}
           </div>
         </div>
 
         {/* Theatre Location Chip right below the movie card */}
-        <div className="flex items-center justify-between text-[11px] text-zinc-300 pt-1.5 border-t border-white/[0.08]">
-          <span className="flex items-center gap-1 text-zinc-300 truncate font-medium">
-            <span className="text-[#ffb703] text-xs">📍</span>
+        <div className="flex items-center justify-between text-[11px] text-zinc-300 pt-1.5 border-t border-white/[0.08] mt-auto">
+          <span className="flex items-center gap-1 text-zinc-300 truncate font-medium max-w-[75%]">
+            <span className="text-[#ffb703] text-xs shrink-0">📍</span>
             <span className="truncate">{theatreDisplay}</span>
           </span>
           <span className="text-[10px] text-[#00d4aa] font-bold bg-[#00d4aa]/10 border border-[#00d4aa]/20 px-1.5 py-0.5 rounded shrink-0">
