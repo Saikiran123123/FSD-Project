@@ -30,27 +30,54 @@ app.use(helmet({
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
+  'http://localhost:4173',
   'http://127.0.0.1:5173',
-  ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map(u => u.trim()) : [])
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:4173',
+  'https://moviebooking-blush.vercel.app',
+  ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map(u => u.trim().replace(/\/$/, '')) : [])
 ].filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow requests with no origin (like mobile apps or curl)
+      // 1. Allow requests with no origin (like mobile apps, curl, server-to-server)
+      if (!origin) return callback(null, true);
+
+      // 2. Exact match from allowedOrigins or wildcard
+      if (allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+        return callback(null, true);
+      }
+
+      // 3. Match any vercel deployment (production or preview branch deployments)
+      if (/^https:\/\/.*\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // 4. Match any localhost or 127.0.0.1 port
+      if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // 5. Match Render backend self-origin
+      if (/^https:\/\/.*\.onrender\.com$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // 6. In development mode or explicit match
       if (
-        !origin ||
-        allowedOrigins.includes(origin) ||
-        allowedOrigins.includes('*') ||
         process.env.NODE_ENV !== 'production' ||
         (process.env.CLIENT_URL && (process.env.CLIENT_URL === '*' || origin.startsWith(process.env.CLIENT_URL.replace(/\/$/, ''))))
       ) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS policy'));
+        return callback(null, true);
       }
+
+      return callback(new Error(`Not allowed by CORS: ${origin}`));
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+    optionsSuccessStatus: 200,
   })
 );
 
