@@ -1,0 +1,10 @@
+{
+  "name": "fsd-project-client-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix vite run build",
+    "start": "npm --prefix vite run preview",
+    "dev": "npm --prefix vite run dev"
+  }
+}
